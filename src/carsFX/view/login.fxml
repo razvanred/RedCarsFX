@@ -1,0 +1,45 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXButton?>
+<BorderPane fx:controller="carsFX.control.Login"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <VBox spacing="1">
+            <padding>
+                <Insets top="20" left="25" right="25" bottom="30"/>
+            </padding>
+            <Label style="-fx-font-size: 20; -fx-font-weight: bold">Accedi</Label>
+            <Label>Seleziona una concessionaria</Label>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox fx:id="filiali" spacing="23">
+            <padding>
+                <Insets top="30" bottom="40" left="25" right="25"/>
+            </padding>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox spacing="5">
+            <padding>
+                <Insets top="20" bottom="30" left="25" right="25"/>
+            </padding>
+            <BorderPane>
+                <left>
+                    <JFXPasswordField promptText="Password" labelFloat="true" fx:id="passwordField"/>
+                </left>
+                <right>
+                    <JFXButton text="ACCEDI" onAction="#checkPasskey" style="-fx-background-color: dodgerblue" textFill="white"/>
+                </right>
+            </BorderPane>
+            <Label textFill="red" fx:id="somethingWrong" textAlignment="CENTER"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>
