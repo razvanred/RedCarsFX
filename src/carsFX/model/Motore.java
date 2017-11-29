@@ -3,17 +3,17 @@ package carsFX.model;
 public class Motore {
 
     private int cilindrata;
-    private int cv;
+    private int kw;
     private Alimentazione alimentazione;
 
-    public Motore(Alimentazione alimentazione, int cilindrata, int cv) {
+    public Motore(final Alimentazione alimentazione, final int cilindrata, final int kw) {
         this.alimentazione = alimentazione;
         this.cilindrata = cilindrata;
-        this.cv = cv;
+        this.kw = kw;
     }
 
-    public int getCv() {
-        return cv;
+    public int getKw() {
+        return kw;
     }
 
     public int getCilindrata() {

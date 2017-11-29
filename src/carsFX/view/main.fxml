@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.Main">
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="carsFX.control.Main"
-            prefHeight="400.0" prefWidth="600.0">
+    <top>
+        <HBox spacing="3" fx:id="imagesContainer"/>
 
-</AnchorPane>
+    </top>
+
+    <center>
+        <JFXTreeTableView fx:id="treeView"/>
+    </center>
+
+</BorderPane>
