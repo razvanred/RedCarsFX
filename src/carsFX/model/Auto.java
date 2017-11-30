@@ -31,6 +31,6 @@ public class Auto {
     }
 
     public boolean isNeo() {
-        return motore.getKw() / tipo.getTonn() <= 55;
+        return motore.getKw() <= 70 && motore.getKw() / tipo.getTonn() <= 55;
     }
 }

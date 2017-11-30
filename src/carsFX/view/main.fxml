@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.Main">
 
     <top>
-        <HBox spacing="3" fx:id="imagesContainer"/>
+        <VBox alignment="CENTER" spacing="3">
+            <padding>
+                <Insets topRightBottomLeft="15"/>
+            </padding>
+
+            <BorderPane>
+                <left>
+                    <HBox spacing="1">
+                        <Label style="-fx-alignment: center; -fx-font-weight: bold">Alimentazione</Label>
+                        <JFXComboBox fx:id="comboAlimentazione"/>
+                    </HBox>
+                </left>
+
+                <center>
+                    <HBox spacing="1">
+                        <Label style="-fx-alignment: center; -fx-font-weight: bold">Versione</Label>
+                        <JFXComboBox fx:id="comboVersione"/>
+                    </HBox>
+                </center>
+
+                <right>
+                    <JFXCheckBox text="Neopatentati" fx:id="neoCheck"/>
+                </right>
+            </BorderPane>
+
+        </VBox>
     </top>
 
     <center>

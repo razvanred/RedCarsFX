@@ -1,5 +1,8 @@
 package carsFX.model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public enum Marca {
 
     VOLKSWAGEN("Volkswagen", "volkswagen.png"),
@@ -13,18 +16,19 @@ public enum Marca {
 
     private static final String PATH = "/logo/";
     private String nome, path;
+    //private ImageView logo;
 
     Marca(String nome, String path) {
         this.nome = nome;
-        this.path = PATH + path;
+        this.path = path;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getPath() {
-        return path;
+    public ImageView getLogo() {
+        return new ImageView(new Image(getClass().getResourceAsStream(PATH + path)));
     }
 
 }

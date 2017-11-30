@@ -1,7 +1,8 @@
 package carsFX.control;
 
 import carsFX.model.*;
-import javafx.beans.property.SimpleBooleanProperty;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -11,9 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,34 +20,29 @@ import java.util.ResourceBundle;
 public class Main implements Initializable {
 
     @FXML
-    private HBox imagesContainer;
+    private TableView table;
 
     @FXML
-    private TableView table;
+    private JFXCheckBox neoCheck;
+
+    @FXML
+    private JFXComboBox<String> comboVersione;
+
+    @FXML
+    private JFXComboBox<String> comboAlimentazione;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for (Marca m : Marca.values()) {
-
-            ImageView img = new ImageView(new Image(getClass().getResourceAsStream(m.getPath())));
-            img.setFitWidth(50);
-
-            img.setSmooth(true);
-            img.setCache(true);
-            img.setPreserveRatio(true);
-
-            imagesContainer.getChildren().add(img);
-        }
 
         //table.setEditable(false);
 
-        TableColumn<RowAuto, ImageView> marcaCol = new TableColumn<>("Marca");
+        TableColumn<RowAuto, Marca> marcaCol = new TableColumn<>("Marca");
         TableColumn<RowAuto, String> modelloCol = new TableColumn<>("Modello");
         TableColumn<RowAuto, String> versioneColumn = new TableColumn<>("Versione");
         TableColumn<RowAuto, String> pesoColumn = new TableColumn<>("Peso in t");
         TableColumn<RowAuto, Integer> kwColumn = new TableColumn<>("KW");
         TableColumn<RowAuto, Integer> cilindrataColumn = new TableColumn<>("Cilindrata");
-        TableColumn<RowAuto, Boolean> neoColumn = new TableColumn<>("Neopatentati");
+        TableColumn<RowAuto, JFXCheckBox> neoColumn = new TableColumn<>("Neopatentati");
         TableColumn<RowAuto, Alimentazione> alimentazioneColumn = new TableColumn<>("Alimentazione");
 
 
@@ -66,32 +60,60 @@ public class Main implements Initializable {
         neoColumn.setCellValueFactory(new PropertyValueFactory<>("neo"));
         alimentazioneColumn.setCellValueFactory(new PropertyValueFactory<>("alimentazione"));
 
+        comboVersione.getItems().add("Tutti");
+        comboAlimentazione.getItems().add("Tutti");
 
-        table.getColumns().addAll(marcaCol, modelloCol, versioneColumn, pesoColumn, kwColumn, cilindrataColumn, neoColumn, alimentazioneColumn);
+        for (Alimentazione a : Alimentazione.values())
+            comboAlimentazione.getItems().add(a.name());
+
+        for (Versione v : Versione.values())
+            comboVersione.getItems().add(v.getDescrizione());
+
+        comboVersione.getSelectionModel().selectFirst();
+        comboAlimentazione.getSelectionModel().selectFirst();
+
+        //comboVersione.setValue(0);
+
+        table.getColumns().addAll(marcaCol, modelloCol, versioneColumn, pesoColumn, kwColumn, cilindrataColumn, alimentazioneColumn, neoColumn);
         table.setItems(cars);
 
     }
 
+    /*private <Marca> void addTooltipToColumnCells(TableColumn<RowAuto, Marca> column) {
+
+        Callback<TableColumn<RowAuto, Marca>, TableCell<RowAuto, Marca>> existingCellFactory
+                = column.getCellFactory();
+
+        column.setCellFactory(c -> {
+            TableCell<RowAuto, Marca> cell = existingCellFactory.call(c);
+
+            Tooltip tooltip = new Tooltip();
+            // can use arbitrary binding here to make text depend on cell
+            // in any way you need:
+            tooltip.textProperty().bind(cell.itemProperty().asString());
+
+            cell.setTooltip(tooltip);
+            return cell;
+        });
+    }*/
+
     public class RowAuto {
 
-        private final ImageView marca;
+        private final Marca marca;
         private final SimpleStringProperty modello;
         private final SimpleStringProperty versione;
         private final SimpleStringProperty peso;
         private final SimpleIntegerProperty cilindrata;
         private final SimpleIntegerProperty kw;
-        private final SimpleBooleanProperty neo;
+        private final JFXCheckBox neo;
         private final Alimentazione alimentazione;
 
         //private final BooleanProperty active=new SimpleBooleanProperty(false);
 
         public RowAuto(Auto a) {
-            marca = new ImageView(new Image(a.getMarca().getPath()));
+            marca = a.getMarca();
 
-            marca.setFitWidth(35);
-            marca.setSmooth(true);
-            marca.setCache(true);
-            marca.setPreserveRatio(true);
+            //Tooltip.install(marca,new Tooltip(a.getMarca().getNome()));
 
             modello = new SimpleStringProperty(a.getModello());
             versione = new SimpleStringProperty(a.getTipo().getVersione().getDescrizione());
@@ -103,7 +125,9 @@ public class Main implements Initializable {
             cilindrata = new SimpleIntegerProperty(a.getMotore().getCilindrata());
             alimentazione = a.getMotore().getAlimentazione();
 
-            neo = new SimpleBooleanProperty(a.isNeo());
+            neo = new JFXCheckBox();
+            neo.setSelected(a.isNeo());
+            neo.setDisable(true);
         }
 
 
@@ -112,7 +136,14 @@ public class Main implements Initializable {
         }
 
         public ImageView getMarca() {
-            return marca;
+
+            ImageView logo = marca.getLogo();
+            logo.setFitWidth(35);
+            logo.setSmooth(true);
+            logo.setCache(true);
+            logo.setPreserveRatio(true);
+
+            return logo;
         }
 
         public int getKw() {
@@ -131,8 +162,8 @@ public class Main implements Initializable {
             return cilindrata.get();
         }
 
-        public Boolean isNeo() {
-            return neo.get();
+        public JFXCheckBox isNeo() {
+            return neo;
         }
 
         public String getVersione() {
