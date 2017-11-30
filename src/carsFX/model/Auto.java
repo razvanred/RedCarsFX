@@ -1,8 +1,6 @@
 package carsFX.model;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-
-public class Auto extends RecursiveTreeObject<Auto> {
+public class Auto {
 
     private final String modello;
     private final Marca marca;

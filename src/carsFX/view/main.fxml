@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.Main">
 
     <top>
         <HBox spacing="3" fx:id="imagesContainer"/>
-
     </top>
 
     <center>
-        <JFXTreeTableView fx:id="treeView"/>
+        <TableView fx:id="table"/>
     </center>
 
 </BorderPane>

@@ -5,5 +5,6 @@ public enum Alimentazione {
     BENZINA,
     METANO,
     GPL,
-    ELETTRICA
+    ELETTRICA,
+    IBRIDA
 }

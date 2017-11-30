@@ -12,15 +12,15 @@ public class Motore {
         this.kw = kw;
     }
 
-    public int getKw() {
+    public final int getKw() {
         return kw;
     }
 
-    public int getCilindrata() {
+    public final int getCilindrata() {
         return cilindrata;
     }
 
-    public Alimentazione getAlimentazione() {
+    public final Alimentazione getAlimentazione() {
         return alimentazione;
     }
 }
