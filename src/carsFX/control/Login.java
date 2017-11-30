@@ -1,5 +1,6 @@
 package carsFX.control;
 
+import carsFX.Principale;
 import carsFX.model.Filiale;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
@@ -40,7 +41,7 @@ public class Login implements Initializable {
         for (Filiale f : Filiale.values()) {
             JFXRadioButton radio = new JFXRadioButton(f.getNome());
             filiali.getChildren().add(radio);
-            radio.setUserData(f.getPassword());
+            radio.setUserData(f.name());
             radio.setToggleGroup(toggleGroup);
         }
 
@@ -52,14 +53,22 @@ public class Login implements Initializable {
 
     public void checkPasskey(ActionEvent ae) {
 
-        if (toggleGroup.getSelectedToggle().getUserData().toString().compareTo(passwordField.getText()) == 0) {
-            try {
+        Filiale f = Filiale.valueOf(toggleGroup.getSelectedToggle().getUserData().toString());
 
-                ((Stage)((Node)ae.getSource()).getScene().getWindow()).close();
+        if (passwordField.getText().isEmpty())
+            somethingWrong.setText("Campo obbligatorio");
+        else if (f.getPassword().compareTo(passwordField.getText()) == 0) {
+            try {
+                ((Stage) ((Node) (ae.getSource())).getScene().getWindow()).close();
 
                 Stage primaryStage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
                 primaryStage.setScene(new Scene(root, 550, 450));
+                primaryStage.setTitle(f.getNome() + Principale.TITLE);
+                primaryStage.show();
+
+                Principale.choosen = f;
+
             } catch (IOException io) {
                 io.printStackTrace();
             }

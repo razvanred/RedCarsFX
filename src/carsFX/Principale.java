@@ -1,5 +1,6 @@
 package carsFX;
 
+import carsFX.model.Filiale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,15 +9,17 @@ import javafx.stage.Stage;
 
 public class Principale extends Application {
 
+    public final static String TITLE = " - RosuCars";
+    public static Filiale choosen;
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
-        primaryStage.setTitle("Accedi - RosuCars");
+        primaryStage.setTitle("Accedi" + TITLE);
         primaryStage.setScene(new Scene(root, 300, 435));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
