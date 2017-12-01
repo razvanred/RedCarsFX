@@ -1,4 +1,4 @@
-package carsFX.model;
+package carsFX.model.enums;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

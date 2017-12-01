@@ -1,4 +1,4 @@
-package carsFX.model;
+package carsFX.model.enums;
 
 public enum Versione {
 

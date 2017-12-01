@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          xmlns="http://javafx.com/javafx"
+          fx:controller="carsFX.control.AddCar"
+          prefHeight="400.0" prefWidth="600.0">
+
+    <padding>
+        <Insets topRightBottomLeft="30"/>
+    </padding>
+
+    <HBox spacing="2">
+        <Label style="-fx-font-weight: bold">Marca</Label>
+        <JFXComboBox fx:id="brandCombo"/>
+    </HBox>
+
+    <HBox spacing="2">
+        <Label style="-fx-font-weight: bold">Versione</Label>
+        <JFXComboBox fx:id="versionCombo"/>
+    </HBox>
+
+    <HBox spacing="2">
+        <Label style="-fx-font-weight: bold">Alimentazione</Label>
+        <JFXComboBox fx:id="alimCombo"/>
+    </HBox>
+
+    <JFXTextField labelFloat="true" promptText="A partire da EUR" fx:id="startingFrom"/>
+
+    <JFXTextField labelFloat="true" promptText="Modello" fx:id="modello"/>
+
+</GridPane>

@@ -1,5 +1,7 @@
 package carsFX.model;
 
+import carsFX.model.enums.Versione;
+
 import java.text.DecimalFormat;
 
 public class Tipo {

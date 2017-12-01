@@ -1,5 +1,7 @@
 package carsFX.model;
 
+import carsFX.model.enums.Marca;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 

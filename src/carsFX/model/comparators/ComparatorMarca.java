@@ -1,4 +1,6 @@
-package carsFX.model;
+package carsFX.model.comparators;
+
+import carsFX.model.Auto;
 
 import java.util.Comparator;
 
