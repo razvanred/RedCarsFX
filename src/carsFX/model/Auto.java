@@ -1,36 +1,42 @@
 package carsFX.model;
 
-public class Auto {
+import java.io.Serializable;
+
+public class Auto implements Serializable {
 
     private final String modello;
     private final Marca marca;
     private final Motore motore;
     private final Tipo tipo;
+    private final int price;
 
-    public Auto(final Marca marca, final String modello, final Motore motore, final Tipo tipo) {
+    public Auto(final Marca marca, final String modello, final Motore motore, final Tipo tipo,final int price) {
         this.modello = modello;
         this.motore = motore;
         this.tipo = tipo;
         this.marca = marca;
+        this.price=price;
     }
 
-    public Marca getMarca() {
+    public final Marca getMarca() {
         return marca;
     }
 
-    public Motore getMotore() {
+    public final Motore getMotore() {
         return motore;
     }
 
-    public String getModello() {
+    public final String getModello() {
         return modello;
     }
 
-    public Tipo getTipo() {
+    public final Tipo getTipo() {
         return tipo;
     }
 
-    public boolean isNeo() {
+    public final boolean isNeo() {
         return motore.getKw() <= 70 && motore.getKw() / tipo.getTonn() <= 55;
     }
+
+    public final int getPrice(){ return price; }
 }

@@ -1,6 +1,6 @@
 package carsFX.model;
 
-public enum Filiale {
+public enum Filiale{
 
     TREVISO("Treviso", "3viso"),
     ODERZO("Oderzo", "orz"),

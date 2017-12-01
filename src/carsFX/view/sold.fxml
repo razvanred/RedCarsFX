@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import org.controlsfx.control.SegmentedButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.Sold">
+
+    <top>
+        <VBox spacing="25">
+
+            <padding>
+                <Insets topRightBottomLeft="10"/>
+            </padding>
+
+            <BorderPane>
+                <padding>
+                    <Insets topRightBottomLeft="15"/>
+                </padding>
+
+                <left>
+
+                    <HBox spacing="5">
+                        <HBox spacing="3">
+                            <Label style="-fx-font-weight: bold">Alimentazione</Label>
+                            <JFXComboBox fx:id="comboAlimentazione"/>
+                        </HBox>
+                        <HBox spacing="3">
+                            <Label style="-fx-font-weight: bold">Versione</Label>
+                            <JFXComboBox fx:id="comboVersione"/>
+                        </HBox>
+                        <HBox spacing="3">
+                            <Label style="-fx-font-weight: bold">A partire da EUR</Label>
+                            <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
+                        </HBox>
+                    </HBox>
+
+                </left>
+                <right>
+                    <JFXCheckBox fx:id="neoCheck" text="Neopatentati"/>
+                </right>
+
+            </BorderPane>
+
+            <BorderPane>
+                <padding><Insets topRightBottomLeft="10"/></padding>
+                <center>
+                    <SegmentedButton fx:id="filterBrand"/>
+                </center>
+            </BorderPane>
+
+            <BorderPane>
+                <padding><Insets topRightBottomLeft="10"/></padding>
+                <center>
+                    <HBox spacing="10" alignment="CENTER">
+                        <JFXRadioButton fx:id="radioNew" text="Nuova"/>
+                        <JFXRadioButton fx:id="radioUsed" text="Usata"/>
+                    </HBox>
+                </center>
+            </BorderPane>
+
+        </VBox>
+
+    </top>
+
+    <center>
+        <TableView fx:id="table"/>
+    </center>
+
+</BorderPane>
