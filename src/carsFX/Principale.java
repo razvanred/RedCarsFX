@@ -1,6 +1,6 @@
 package carsFX;
 
-import carsFX.model.Filiale;
+import carsFX.model.enums.Filiale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,7 +1,7 @@
 package carsFX.control;
 
 import carsFX.Principale;
-import carsFX.model.Filiale;
+import carsFX.model.enums.Filiale;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.ActionEvent;
@@ -64,7 +64,7 @@ public class Login implements Initializable {
                 Stage primaryStage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
 
-                Scene scene=new Scene(root, 850, 680);
+                Scene scene = new Scene(root, 950, 680);
 
                 primaryStage.setScene(scene);
                 primaryStage.setTitle(f.getNome() + Principale.TITLE);

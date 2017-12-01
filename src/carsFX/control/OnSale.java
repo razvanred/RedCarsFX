@@ -1,6 +1,12 @@
 package carsFX.control;
 
-import carsFX.model.*;
+import carsFX.model.Auto;
+import carsFX.model.AutoUsata;
+import carsFX.model.Motore;
+import carsFX.model.Tipo;
+import carsFX.model.enums.Alimentazione;
+import carsFX.model.enums.Marca;
+import carsFX.model.enums.Versione;
 import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

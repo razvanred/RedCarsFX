@@ -1,5 +1,7 @@
 package carsFX.model;
 
+import carsFX.model.enums.Alimentazione;
+
 public class Motore {
 
     private int cilindrata;
