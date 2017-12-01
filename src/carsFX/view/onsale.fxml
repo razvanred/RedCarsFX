@@ -53,19 +53,31 @@
 
             </BorderPane>
 
-            <BorderPane fx:id="addRange">
-                <padding><Insets topRightBottomLeft="15"/></padding>
+            <BorderPane>
+                <padding>
+                    <Insets topRightBottomLeft="15"/>
+                </padding>
+                <center>
+                    <HBox spacing="3" alignment="CENTER">
+                        <Label style="-fx-font-weight: bold">A partire da EUR</Label>
+                        <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
+                    </HBox>
+                </center>
             </BorderPane>
 
             <BorderPane>
-                <padding><Insets topRightBottomLeft="10"/></padding>
+                <padding>
+                    <Insets topRightBottomLeft="10"/>
+                </padding>
                 <center>
                     <SegmentedButton fx:id="filterBrand"/>
                 </center>
             </BorderPane>
 
             <BorderPane>
-                <padding><Insets topRightBottomLeft="10"/></padding>
+                <padding>
+                    <Insets topRightBottomLeft="10"/>
+                </padding>
                 <center>
                     <HBox spacing="10" alignment="CENTER">
                         <JFXRadioButton fx:id="radioNew" text="Nuova"/>
@@ -84,9 +96,11 @@
 
     <bottom>
         <BorderPane>
-            <padding><Insets topRightBottomLeft="10"/></padding>
+            <padding>
+                <Insets topRightBottomLeft="10"/>
+            </padding>
             <right>
-                <JFXButton onAction="#addCar" textFill="white" style="-fx-background-color: green" text="NUOVA"/>
+                <JFXButton onAction="#addCar" textFill="white" style="-fx-background-color: green" text="AGGIUNGI"/>
             </right>
         </BorderPane>
 

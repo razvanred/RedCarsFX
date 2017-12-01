@@ -40,7 +40,8 @@ public class OnSale implements Initializable {
     @FXML
     private JFXComboBox<String> comboAlimentazione;
 
-    private RangeSlider startingAt;
+    @FXML
+    private JFXTextField startingAt;
 
     @FXML
     private SegmentedButton filterBrand;
@@ -48,13 +49,10 @@ public class OnSale implements Initializable {
     @FXML
     private JFXRadioButton radioNew, radioUsed;
 
-    @FXML
-    private BorderPane addRange;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        /*startingAt.textProperty().addListener(new ChangeListener<String>() {
+        startingAt.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
@@ -62,14 +60,10 @@ public class OnSale implements Initializable {
                     startingAt.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
-        });*/
+        });
 
-        startingAt=new RangeSlider(0,2000,1000,50000);
-        startingAt.setShowTickLabels(true);
-        startingAt.setShowTickMarks(true);
-        startingAt.setBlockIncrement(100);
 
-        addRange.getChildren().add(startingAt);
+        //addRange.getChildren().add(startingAt);
 
         ToggleGroup toggleGroup=new ToggleGroup();
         radioNew.setToggleGroup(toggleGroup);
