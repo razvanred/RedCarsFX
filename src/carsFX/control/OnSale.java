@@ -18,7 +18,10 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.SegmentedButton;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +32,7 @@ public class OnSale implements Initializable {
     private TableView table;
 
     @FXML
-    private JFXCheckBox neoCheck;
+    private ToggleSwitch neoToggle;
 
     @FXML
     private JFXComboBox<String> comboVersione;
@@ -37,8 +40,7 @@ public class OnSale implements Initializable {
     @FXML
     private JFXComboBox<String> comboAlimentazione;
 
-    @FXML
-    private JFXTextField startingAt;
+    private RangeSlider startingAt;
 
     @FXML
     private SegmentedButton filterBrand;
@@ -46,10 +48,13 @@ public class OnSale implements Initializable {
     @FXML
     private JFXRadioButton radioNew, radioUsed;
 
+    @FXML
+    private BorderPane addRange;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        startingAt.textProperty().addListener(new ChangeListener<String>() {
+        /*startingAt.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
@@ -57,7 +62,14 @@ public class OnSale implements Initializable {
                     startingAt.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
-        });
+        });*/
+
+        startingAt=new RangeSlider(0,2000,1000,50000);
+        startingAt.setShowTickLabels(true);
+        startingAt.setShowTickMarks(true);
+        startingAt.setBlockIncrement(100);
+
+        addRange.getChildren().add(startingAt);
 
         ToggleGroup toggleGroup=new ToggleGroup();
         radioNew.setToggleGroup(toggleGroup);

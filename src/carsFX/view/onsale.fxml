@@ -13,6 +13,8 @@
 <?import org.controlsfx.control.SegmentedButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXButton?>
+<?import org.controlsfx.control.ToggleSwitch?>
+<?import org.controlsfx.control.RangeSlider?>
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.OnSale">
 
     <top>
@@ -38,17 +40,21 @@
                             <Label style="-fx-font-weight: bold">Versione</Label>
                             <JFXComboBox fx:id="comboVersione"/>
                         </HBox>
-                        <HBox spacing="3">
+                        <!--<HBox spacing="3">
                             <Label style="-fx-font-weight: bold">A partire da EUR</Label>
                             <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
-                        </HBox>
+                        </HBox>-->
                     </HBox>
 
                 </left>
                 <right>
-                    <JFXCheckBox fx:id="neoCheck" text="Neopatentati"/>
+                    <ToggleSwitch text="Filtra per neopatentati" selected="false" id="neoToggle"/>
                 </right>
 
+            </BorderPane>
+
+            <BorderPane fx:id="addRange">
+                <padding><Insets topRightBottomLeft="15"/></padding>
             </BorderPane>
 
             <BorderPane>
