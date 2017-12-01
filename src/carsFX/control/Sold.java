@@ -19,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.SegmentedButton;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +30,7 @@ public class Sold implements Initializable {
     private TableView table;
 
     @FXML
-    private JFXCheckBox neoCheck;
+    private ToggleSwitch neoCheck;
 
     @FXML
     private JFXComboBox<String> comboVersione;

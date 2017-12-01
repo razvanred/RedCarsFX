@@ -12,18 +12,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class OnSale implements Initializable {
@@ -228,6 +224,28 @@ public class OnSale implements Initializable {
     }
 
     public void addCar(){
-        //TODO procedura guidata ControlsFX
+        System.out.println(table.getSelectionModel().getSelectedItem());
+    }
+
+    public void removeCar() {
+        Alert alert;
+        RowAuto row = (RowAuto) table.getSelectionModel().getSelectedItem();
+
+        if (row != null) {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Conferma");
+            alert.setHeaderText("Sei sicuro di voler elinare l'auto selezionata?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                System.err.println("OK");
+            }
+        } else {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attenzione");
+            alert.setHeaderText("Devi prima selezionare un'auto");
+            alert.showAndWait();
+        }
+
     }
 }

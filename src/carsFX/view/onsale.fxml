@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import org.controlsfx.control.SegmentedButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
-<?import com.jfoenix.controls.JFXButton?>
 <?import org.controlsfx.control.ToggleSwitch?>
-<?import org.controlsfx.control.RangeSlider?>
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.OnSale">
 
     <top>
@@ -40,29 +32,17 @@
                             <Label style="-fx-font-weight: bold">Versione</Label>
                             <JFXComboBox fx:id="comboVersione"/>
                         </HBox>
-                        <!--<HBox spacing="3">
+                        <HBox spacing="3">
                             <Label style="-fx-font-weight: bold">A partire da EUR</Label>
                             <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
-                        </HBox>-->
+                        </HBox>
                     </HBox>
 
                 </left>
                 <right>
-                    <ToggleSwitch text="Filtra per neopatentati" selected="false" id="neoToggle"/>
+                    <ToggleSwitch fx:id="neoToggle" text="Filtra per neopatentati"/>
                 </right>
 
-            </BorderPane>
-
-            <BorderPane>
-                <padding>
-                    <Insets topRightBottomLeft="15"/>
-                </padding>
-                <center>
-                    <HBox spacing="3" alignment="CENTER">
-                        <Label style="-fx-font-weight: bold">A partire da EUR</Label>
-                        <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
-                    </HBox>
-                </center>
             </BorderPane>
 
             <BorderPane>
@@ -100,7 +80,11 @@
                 <Insets topRightBottomLeft="10"/>
             </padding>
             <right>
-                <JFXButton onAction="#addCar" textFill="white" style="-fx-background-color: green" text="AGGIUNGI"/>
+                <HBox spacing="7">
+                    <JFXButton onAction="#removeCar" textFill="white" style="-fx-background-color: red"
+                               text="RIMUOVI SELEZIONATO"/>
+                    <JFXButton onAction="#addCar" textFill="white" style="-fx-background-color: green" text="AGGIUNGI"/>
+                </HBox>
             </right>
         </BorderPane>
 

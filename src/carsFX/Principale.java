@@ -1,13 +1,11 @@
 package carsFX;
 
-import carsFX.model.*;
+import carsFX.model.Filiale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.time.LocalDate;
 
 public class Principale extends Application {
 
@@ -22,6 +20,8 @@ public class Principale extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+
+        //System.out.println(Accessorio.AUTORADIO.name());
         //Auto usata=new AutoUsata(Marca.PEUGEOT,"206", new Motore(Alimentazione.BENZINA,1500,40),new Tipo(Versione.UTILITARIA,3f), LocalDate.now());
         //Auto nuova=new Auto(Marca.PEUGEOT,"206", new Motore(Alimentazione.BENZINA,1500,40),new Tipo(Versione.UTILITARIA,3f));
         //System.out.println(nuova instanceof AutoUsata);

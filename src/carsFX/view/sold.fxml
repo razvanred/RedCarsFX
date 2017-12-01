@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.SegmentedButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
+<?import org.controlsfx.control.ToggleSwitch?>
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.Sold">
 
     <top>
@@ -45,7 +40,7 @@
 
                 </left>
                 <right>
-                    <JFXCheckBox fx:id="neoCheck" text="Neopatentati"/>
+                    <ToggleSwitch fx:id="neoCheck" text="Filtra per neopatentati"/>
                 </right>
 
             </BorderPane>

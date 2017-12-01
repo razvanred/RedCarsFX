@@ -1,8 +1,9 @@
 package carsFX.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class AutoUsata extends Auto {
+public class AutoUsata extends Auto implements Serializable {
 
     private LocalDate date;
 
