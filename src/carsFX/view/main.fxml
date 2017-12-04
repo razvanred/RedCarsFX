@@ -17,7 +17,7 @@
             </Tab>
 
             <Tab text="Extra">
-
+                <fx:include source="addcar.fxml"/>
             </Tab>
 
         </JFXTabPane>

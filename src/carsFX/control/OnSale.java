@@ -25,6 +25,7 @@ import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -100,6 +101,7 @@ public class OnSale implements Initializable {
         final ObservableList<RowAuto> cars = FXCollections.observableArrayList();
         cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
         cars.add(new RowAuto(new Auto(Marca.BMW, "Serie 5", new Motore(Alimentazione.DIESEL, 3000, 110), new Tipo(Versione.BERLINA, 2f), 1500)));
+        cars.add(new RowAuto(new AutoUsata(Marca.MERCEDES_BENZ, "Classe A", new Motore(Alimentazione.DIESEL, 2000, 90), new Tipo(Versione.SUPERCAR, 1.3f), 20000, LocalDate.now())));
 
         marcaCol.setCellValueFactory(new PropertyValueFactory<>("marca"));
         modelloCol.setCellValueFactory(new PropertyValueFactory<>("modello"));

@@ -3,34 +3,35 @@
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml"
           xmlns="http://javafx.com/javafx"
           fx:controller="carsFX.control.AddCar"
-          prefHeight="400.0" prefWidth="600.0">
+          prefHeight="400.0" prefWidth="600.0" vgap="70" hgap="30">
 
     <padding>
         <Insets topRightBottomLeft="30"/>
     </padding>
 
-    <HBox spacing="2">
+    <HBox spacing="2" GridPane.columnIndex="0" GridPane.rowIndex="0">
         <Label style="-fx-font-weight: bold">Marca</Label>
         <JFXComboBox fx:id="brandCombo"/>
     </HBox>
 
-    <HBox spacing="2">
+    <HBox spacing="2" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <Label style="-fx-font-weight: bold">Versione</Label>
         <JFXComboBox fx:id="versionCombo"/>
     </HBox>
 
-    <HBox spacing="2">
+    <HBox spacing="2" GridPane.rowIndex="1" GridPane.columnIndex="1">
         <Label style="-fx-font-weight: bold">Alimentazione</Label>
         <JFXComboBox fx:id="alimCombo"/>
     </HBox>
 
-    <JFXTextField labelFloat="true" promptText="A partire da EUR" fx:id="startingFrom"/>
+    <JFXTextField labelFloat="true" promptText="Prezzo base EUR" fx:id="startingFrom" GridPane.columnIndex="0"
+                  GridPane.columnSpan="2" GridPane.rowIndex="2"/>
 
-    <JFXTextField labelFloat="true" promptText="Modello" fx:id="modello"/>
+    <JFXTextField labelFloat="true" promptText="Modello" fx:id="modello" GridPane.columnIndex="1"
+                  GridPane.rowIndex="0"/>
 
 </GridPane>

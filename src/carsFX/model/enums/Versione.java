@@ -5,7 +5,8 @@ public enum Versione {
     BREAK("Famigliare"),
     UTILITARIA("Utilitaria"),
     BERLINA("Berlina"),
-    SUV("Crossover");
+    SUV("Crossover"),
+    SUPERCAR("Supercar");
 
     private String descrizione;
 
