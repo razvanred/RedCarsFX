@@ -6,7 +6,8 @@ public enum Versione {
     UTILITARIA("Utilitaria"),
     BERLINA("Berlina"),
     SUV("Crossover"),
-    SUPERCAR("Supercar");
+    SUPERCAR("Supercar"),
+    HYPERCAR("Hypercar");
 
     private String descrizione;
 

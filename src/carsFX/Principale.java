@@ -16,7 +16,7 @@ public class Principale extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
         primaryStage.setTitle("Accedi" + TITLE);
-        primaryStage.setScene(new Scene(root, 300, 435));
+        primaryStage.setScene(new Scene(root, 290, 435));
         primaryStage.setResizable(false);
         primaryStage.show();
 
