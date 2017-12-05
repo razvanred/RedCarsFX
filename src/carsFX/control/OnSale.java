@@ -17,13 +17,19 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.ToggleSwitch;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -65,26 +71,39 @@ public class OnSale implements Initializable {
             }
         });
 
-
-        //addRange.getChildren().add(startingAt);
-
-        ToggleGroup toggleGroup=new ToggleGroup();
-        radioNew.setToggleGroup(toggleGroup);
-        radioUsed.setToggleGroup(toggleGroup);
+        ToggleGroup status=new ToggleGroup();
+        radioNew.setToggleGroup(status);
+        radioNew.setUserData(0);
+        radioUsed.setToggleGroup(status);
+        radioUsed.setUserData(1);
 
         radioNew.setSelected(true);
 
-        filterBrand.getStyleClass().add(SegmentedButton.STYLE_CLASS_DARK);
-        for (Marca m : Marca.values())
-            filterBrand.getButtons().add(new ToggleButton(m.getNome()));
+        ToggleGroup brandGroup=new ToggleGroup();
 
-        filterBrand.getButtons().addListener(new ListChangeListener<ToggleButton>() {
+        filterBrand.getStyleClass().add(SegmentedButton.STYLE_CLASS_DARK);
+        for (Marca m : Marca.values()) {
+            ToggleButton button=new ToggleButton(m.getNome());
+            filterBrand.getButtons().add(button);
+            button.setUserData(m);
+            button.setToggleGroup(brandGroup);
+
+            button.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(newValue){
+                        System.out.println(m.getNome());
+                    }
+                }
+            });
+        }
+
+        status.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
-            public void onChanged(Change<? extends ToggleButton> c) {
-                //c.get
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                System.out.println(newValue.getUserData());
             }
         });
-        System.out.println(filterBrand.getToggleGroup().getSelectedToggle());
 
         TableColumn<RowAuto, Marca> marcaCol = new TableColumn<>("Marca");
         TableColumn<RowAuto, String> modelloCol = new TableColumn<>("Modello");
@@ -231,8 +250,21 @@ public class OnSale implements Initializable {
 
     }
 
-    public void addCar(){
+    public void addCar(ActionEvent actionEvent){
         System.out.println(table.getSelectionModel().getSelectedItem());
+
+        try {
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/addcar.fxml")),550,700));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Aggiungi auto");
+            stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+            stage.showAndWait();
+
+        }catch(IOException io){
+            System.err.println("Colpa dello sviluppatore");
+        }
     }
 
     public void removeCar() {
