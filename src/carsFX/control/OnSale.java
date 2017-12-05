@@ -2,8 +2,6 @@ package carsFX.control;
 
 import carsFX.model.Auto;
 import carsFX.model.AutoUsata;
-import carsFX.model.Motore;
-import carsFX.model.Tipo;
 import carsFX.model.enums.Alimentazione;
 import carsFX.model.enums.Marca;
 import carsFX.model.enums.Versione;
@@ -13,7 +11,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +28,6 @@ import org.controlsfx.control.ToggleSwitch;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -118,10 +114,10 @@ public class OnSale implements Initializable {
         TableColumn<RowAuto, String> dateColumn=new TableColumn<>("Data");
 
         final ObservableList<RowAuto> cars = FXCollections.observableArrayList();
-        cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
+        /*cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
         cars.add(new RowAuto(new Auto(Marca.BMW, "Serie 5", new Motore(Alimentazione.DIESEL, 3000, 110), new Tipo(Versione.BERLINA, 2f), 1500)));
         cars.add(new RowAuto(new AutoUsata(Marca.MERCEDES_BENZ, "Classe A", new Motore(Alimentazione.DIESEL, 2000, 90), new Tipo(Versione.SUPERCAR, 1.3f), 20000, LocalDate.now())));
-
+    */
         marcaCol.setCellValueFactory(new PropertyValueFactory<>("marca"));
         modelloCol.setCellValueFactory(new PropertyValueFactory<>("modello"));
         versioneColumn.setCellValueFactory(new PropertyValueFactory<>("versione"));
@@ -256,7 +252,7 @@ public class OnSale implements Initializable {
         try {
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/addcar.fxml")),550,700));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/addcar.fxml")), 890, 580));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Aggiungi auto");
             stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
