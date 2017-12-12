@@ -1,74 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.*?>
-<?import org.controlsfx.control.SegmentedButton?>
-<?import org.controlsfx.control.ToggleSwitch?>
-<BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.OnSale">
-
-    <top>
-        <VBox spacing="25">
-
-            <padding>
-                <Insets topRightBottomLeft="10"/>
-            </padding>
-
-            <BorderPane>
-                <padding>
-                    <Insets topRightBottomLeft="15"/>
-                </padding>
-
-                <left>
-
-                    <HBox spacing="5">
-                        <HBox spacing="3">
-                            <Label style="-fx-font-weight: bold">Alimentazione</Label>
-                            <JFXComboBox fx:id="comboAlimentazione"/>
-                        </HBox>
-                        <HBox spacing="3">
-                            <Label style="-fx-font-weight: bold">Versione</Label>
-                            <JFXComboBox fx:id="comboVersione"/>
-                        </HBox>
-                        <HBox spacing="3">
-                            <Label style="-fx-font-weight: bold">A partire da EUR</Label>
-                            <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
-                        </HBox>
-                    </HBox>
-
-                </left>
-                <right>
-                    <ToggleSwitch fx:id="neoToggle" text="Filtra per neopatentati"/>
-                </right>
-
-            </BorderPane>
-
-            <BorderPane>
-                <padding>
-                    <Insets topRightBottomLeft="10"/>
-                </padding>
-                <center>
-                    <SegmentedButton fx:id="filterBrand"/>
-                </center>
-            </BorderPane>
-
-            <BorderPane>
-                <padding>
-                    <Insets topRightBottomLeft="10"/>
-                </padding>
-                <center>
-                    <HBox spacing="10" alignment="CENTER">
-                        <JFXRadioButton fx:id="radioNew" text="Nuova"/>
-                        <JFXRadioButton fx:id="radioUsed" text="Usata"/>
-                    </HBox>
-                </center>
-            </BorderPane>
-
-        </VBox>
-
-    </top>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.OnSale" fx:id="parent">
 
     <center>
         <TableView fx:id="table"/>
@@ -82,8 +19,8 @@
             <right>
                 <HBox spacing="7">
                     <JFXButton onAction="#removeCar" textFill="white" style="-fx-background-color: red"
-                               text="RIMUOVI SELEZIONATO"/>
-                    <JFXButton onAction="#addCar" textFill="white" style="-fx-background-color: green" text="AGGIUNGI"/>
+                               text="RIMUOVI"/>
+                    <JFXButton onAction="#sellCar" textFill="white" style="-fx-background-color: green" text="VENDI"/>
                 </HBox>
             </right>
         </BorderPane>

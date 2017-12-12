@@ -46,7 +46,7 @@ public class Gestione {
 
     }
 
-    public void filterAlimentazione(Alimentazione alimentazione, ArrayList<Auto> temp) {
+    public void filterAlimentazione(final Alimentazione alimentazione, ArrayList<Auto> temp) {
 
         for (int i = 0; i < temp.size(); i++)
             if (temp.get(i).getMotore().getAlimentazione() != alimentazione)

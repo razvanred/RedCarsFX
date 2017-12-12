@@ -64,7 +64,7 @@ public class Login implements Initializable {
                 Stage primaryStage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
 
-                Scene scene = new Scene(root, 990, 680);
+                Scene scene = new Scene(root, 1240, 850);
 
                 primaryStage.setScene(scene);
                 primaryStage.setTitle(f.getNome() + Principale.TITLE);

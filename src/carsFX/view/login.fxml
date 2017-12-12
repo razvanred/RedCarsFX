@@ -1,9 +1,8 @@
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
 <BorderPane fx:controller="carsFX.control.Login"
             xmlns:fx="http://javafx.com/fxml">
 
@@ -32,7 +31,8 @@
             </padding>
             <BorderPane>
                 <left>
-                    <JFXPasswordField promptText="Password" labelFloat="true" fx:id="passwordField"/>
+                    <JFXPasswordField promptText="Password" labelFloat="true" fx:id="passwordField"
+                                      onAction="#checkPasskey"/>
                 </left>
                 <right>
                     <JFXButton text="ACCEDI" onAction="#checkPasskey" style="-fx-background-color: dodgerblue" textFill="white"/>

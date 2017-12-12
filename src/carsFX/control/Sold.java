@@ -2,8 +2,6 @@ package carsFX.control;
 
 import carsFX.model.Auto;
 import carsFX.model.AutoUsata;
-import carsFX.model.Motore;
-import carsFX.model.Tipo;
 import carsFX.model.enums.Alimentazione;
 import carsFX.model.enums.Marca;
 import carsFX.model.enums.Versione;
@@ -97,8 +95,8 @@ public class Sold implements Initializable {
         TableColumn<RowAuto, String> priceColumn = new TableColumn<>("A partire da");
 
         final ObservableList<RowAuto> cars = FXCollections.observableArrayList();
-        cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
-        cars.add(new RowAuto(new Auto(Marca.BMW, "Serie 5", new Motore(Alimentazione.DIESEL, 3000, 110), new Tipo(Versione.BERLINA, 2f), 1500)));
+        //cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
+        //cars.add(new RowAuto(new Auto(Marca.BMW, "Serie 5", new Motore(Alimentazione.DIESEL, 3000, 110), new Tipo(Versione.BERLINA, 2f), 1500)));
 
         marcaCol.setCellValueFactory(new PropertyValueFactory<>("marca"));
         modelloCol.setCellValueFactory(new PropertyValueFactory<>("modello"));

@@ -1,107 +1,31 @@
 package carsFX.control;
 
 import carsFX.model.Auto;
-import carsFX.model.AutoUsata;
-import carsFX.model.enums.Alimentazione;
-import carsFX.model.enums.Marca;
-import carsFX.model.enums.Versione;
-import com.jfoenix.controls.*;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.controlsfx.control.SegmentedButton;
-import org.controlsfx.control.ToggleSwitch;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class OnSale implements Initializable {
+public class OnSale extends TableProperties {
 
     @FXML
     private TableView table;
 
     @FXML
-    private ToggleSwitch neoToggle;
-
-    @FXML
-    private JFXComboBox<String> comboVersione;
-
-    @FXML
-    private JFXComboBox<String> comboAlimentazione;
-
-    @FXML
-    private JFXTextField startingAt;
-
-    @FXML
-    private SegmentedButton filterBrand;
-
-    @FXML
-    private JFXRadioButton radioNew, radioUsed;
+    private BorderPane parent;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
 
-        startingAt.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    startingAt.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-
-        ToggleGroup status=new ToggleGroup();
-        radioNew.setToggleGroup(status);
-        radioNew.setUserData(0);
-        radioUsed.setToggleGroup(status);
-        radioUsed.setUserData(1);
-
-        radioNew.setSelected(true);
-
-        ToggleGroup brandGroup=new ToggleGroup();
-
-        filterBrand.getStyleClass().add(SegmentedButton.STYLE_CLASS_DARK);
-        for (Marca m : Marca.values()) {
-            ToggleButton button=new ToggleButton(m.getNome());
-            filterBrand.getButtons().add(button);
-            button.setUserData(m);
-            button.setToggleGroup(brandGroup);
-
-            button.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(newValue){
-                        System.out.println(m.getNome());
-                    }
-                }
-            });
-        }
-
-        status.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                System.out.println(newValue.getUserData());
-            }
-        });
-
-        TableColumn<RowAuto, Marca> marcaCol = new TableColumn<>("Marca");
+        /*TableColumn<RowAuto, Marca> marcaCol = new TableColumn<>("Marca");
         TableColumn<RowAuto, String> modelloCol = new TableColumn<>("Modello");
         TableColumn<RowAuto, String> versioneColumn = new TableColumn<>("Versione");
         TableColumn<RowAuto, String> pesoColumn = new TableColumn<>("Peso in t");
@@ -114,40 +38,28 @@ public class OnSale implements Initializable {
         TableColumn<RowAuto, String> dateColumn=new TableColumn<>("Data");
 
         final ObservableList<RowAuto> cars = FXCollections.observableArrayList();
-        /*cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
+        cars.add(new RowAuto(new Auto(Marca.PEUGEOT, "206", new Motore(Alimentazione.BENZINA, 2000, 70), new Tipo(Versione.UTILITARIA, 1.565f), 13000)));
         cars.add(new RowAuto(new Auto(Marca.BMW, "Serie 5", new Motore(Alimentazione.DIESEL, 3000, 110), new Tipo(Versione.BERLINA, 2f), 1500)));
         cars.add(new RowAuto(new AutoUsata(Marca.MERCEDES_BENZ, "Classe A", new Motore(Alimentazione.DIESEL, 2000, 90), new Tipo(Versione.SUPERCAR, 1.3f), 20000, LocalDate.now())));
     */
-        marcaCol.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        modelloCol.setCellValueFactory(new PropertyValueFactory<>("modello"));
-        versioneColumn.setCellValueFactory(new PropertyValueFactory<>("versione"));
-        pesoColumn.setCellValueFactory(new PropertyValueFactory<>("peso"));
-        kwColumn.setCellValueFactory(new PropertyValueFactory<>("kw"));
-        cilindrataColumn.setCellValueFactory(new PropertyValueFactory<>("cilindrata"));
-        neoColumn.setCellValueFactory(new PropertyValueFactory<>("neo"));
-        alimentazioneColumn.setCellValueFactory(new PropertyValueFactory<>("alimentazione"));
-        buttonSellColumn.setCellValueFactory(new PropertyValueFactory<>("sellButton"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("eurPrice"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/filter.fxml"));
+        try {
+            parent.setTop(loader.load());
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
 
-        comboVersione.getItems().add("Tutti");
-        comboAlimentazione.getItems().add("Tutti");
+        ((Filter) loader.getController()).attachTable(this);
 
-        for (Alimentazione a : Alimentazione.values())
-            comboAlimentazione.getItems().add(a.name());
-
-        for (Versione v : Versione.values())
-            comboVersione.getItems().add(v.getDescrizione());
-
-        comboVersione.getSelectionModel().selectFirst();
-        comboAlimentazione.getSelectionModel().selectFirst();
-
-        table.getColumns().addAll(marcaCol, modelloCol, versioneColumn, alimentazioneColumn, pesoColumn, kwColumn, cilindrataColumn,dateColumn, neoColumn, priceColumn, buttonSellColumn);
-        table.setItems(cars);
-
+        super.initialize(location, resources);
     }
 
-    public class RowAuto {
+    @Override
+    protected TableView getTable() {
+        return table;
+    }
+
+    /*public class RowAuto {
 
         private final Marca marca;
         private final SimpleStringProperty modello;
@@ -240,13 +152,9 @@ public class OnSale implements Initializable {
         public String getVersione() {
             return versione.get();
         }
-    }
+    }*/
 
-    public void comboAction(ActionEvent ae) {
-
-    }
-
-    public void addCar(ActionEvent actionEvent){
+    /*public void addCar(ActionEvent actionEvent){
         System.out.println(table.getSelectionModel().getSelectedItem());
 
         try {
@@ -261,11 +169,11 @@ public class OnSale implements Initializable {
         }catch(IOException io){
             System.err.println("Colpa dello sviluppatore");
         }
-    }
+    }*/
 
     public void removeCar() {
         Alert alert;
-        RowAuto row = (RowAuto) table.getSelectionModel().getSelectedItem();
+        Auto row = (Auto) table.getSelectionModel().getSelectedItem();
 
         if (row != null) {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -282,6 +190,10 @@ public class OnSale implements Initializable {
             alert.setHeaderText("Devi prima selezionare un'auto");
             alert.showAndWait();
         }
+
+    }
+
+    public void sellCar(final ActionEvent ae) {
 
     }
 }

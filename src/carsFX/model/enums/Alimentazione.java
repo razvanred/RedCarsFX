@@ -1,6 +1,8 @@
 package carsFX.model.enums;
 
-public enum Alimentazione {
+import java.io.Serializable;
+
+public enum Alimentazione implements Serializable {
     DIESEL,
     BENZINA,
     METANO,

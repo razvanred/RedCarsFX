@@ -3,7 +3,9 @@ package carsFX.model.enums;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public enum Marca {
+import java.io.Serializable;
+
+public enum Marca implements Serializable {
 
     VOLKSWAGEN("Volkswagen", "volkswagen.png"),
     CITROEN("Citroën", "citroen.png"),
@@ -24,6 +26,11 @@ public enum Marca {
     }
 
     public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public String toString() {
         return nome;
     }
 

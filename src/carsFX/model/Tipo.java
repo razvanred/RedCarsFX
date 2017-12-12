@@ -2,9 +2,10 @@ package carsFX.model;
 
 import carsFX.model.enums.Versione;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Tipo {
+public class Tipo implements Serializable {
 
     private Versione versione;
     private float tonn;

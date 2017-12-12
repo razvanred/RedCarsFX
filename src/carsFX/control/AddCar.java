@@ -1,5 +1,8 @@
 package carsFX.control;
 
+import carsFX.model.Auto;
+import carsFX.model.Motore;
+import carsFX.model.Tipo;
 import carsFX.model.enums.Accessorio;
 import carsFX.model.enums.Alimentazione;
 import carsFX.model.enums.Marca;
@@ -7,7 +10,6 @@ import carsFX.model.enums.Versione;
 import com.jfoenix.controls.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -22,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.ToggleSwitch;
 
 import javax.imageio.ImageIO;
@@ -30,21 +33,22 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddCar implements Initializable {
 
     @FXML
-    private JFXComboBox brandCombo;
+    private JFXComboBox<Marca> brandCombo;
 
     @FXML
     private VBox accContainer;
 
     @FXML
-    private JFXComboBox versionCombo;
+    private JFXComboBox<Versione> versionCombo;
 
     @FXML
-    private JFXComboBox alimCombo;
+    private JFXComboBox<Alimentazione> alimCombo;
 
     @FXML
     private JFXTextField startingFrom, modello, cilindrata, kw;
@@ -65,9 +69,6 @@ public class AddCar implements Initializable {
     private Spinner<Integer> intPeso;
 
     @FXML
-    private JFXSpinner spinnerCilindrata;
-
-    @FXML
     private ToggleSwitch usedSwitch;
 
     @FXML
@@ -81,16 +82,17 @@ public class AddCar implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        accessori=new JFXCheckBox[Accessorio.values().length];
+        accessori = new JFXCheckBox[Accessorio.values().length];
 
-        for(int i=0;i<accessori.length;i++) {
-            final Accessorio accessorio=Accessorio.values()[i];
-            final HBox hbox=new HBox();
+        for (int i = 0; i < accessori.length; i++) {
+            final Accessorio accessorio = Accessorio.values()[i];
+            final HBox hbox = new HBox();
             hbox.setSpacing(10);
             accessori[i] = new JFXCheckBox(accessorio.getDescrizione());
             accessori[i].setOnAction(event -> calcPrice());
+            accessori[i].setUserData(accessorio);
             hbox.getChildren().add(accessori[i]);
-            final Label label=new Label("EUR "+accessorio.getPrice());
+            final Label label = new Label("EUR " + accessorio.getPrice());
             label.setStyle("-fx-font-weight: bold");
             hbox.getChildren().add(label);
             accContainer.getChildren().add(hbox);
@@ -103,10 +105,10 @@ public class AddCar implements Initializable {
             alimCombo.getItems().add(a);
 
         for (Versione v : Versione.values())
-            versionCombo.getItems().add(v.getDescrizione());
+            versionCombo.getItems().add(v);
 
         for (Marca m : Marca.values())
-            brandCombo.getItems().add(m.getNome());
+            brandCombo.getItems().add(m);
 
         alimCombo.getSelectionModel().selectFirst();
         versionCombo.getSelectionModel().selectFirst();
@@ -162,26 +164,57 @@ public class AddCar implements Initializable {
         datePicker.setVisible(false);
     }
 
-    private void calcPrice(){
+    private void calcPrice() {
 
-        int price=0;
+        int price = 0;
 
-        try{
-            price+=Integer.parseInt(startingFrom.getText());
-        }catch(NumberFormatException num){
+        try {
+            price += Integer.parseInt(startingFrom.getText());
+        } catch (NumberFormatException num) {
             System.err.println("Empty field");
             //num.printStackTrace();
         }
 
-        for(int i=0;i<accessori.length;i++)
-            if(accessori[i].isSelected())
-                price+= Accessorio.values()[i].getPrice();
+        for (int i = 0; i < accessori.length; i++)
+            if (accessori[i].isSelected())
+                price += Accessorio.values()[i].getPrice();
 
-        finalPrice.setText(""+price);
+        finalPrice.setText("" + price);
     }
 
     public void aggiungi(ActionEvent ae) {
-        //TODO
+        final Auto auto;
+        float peso = decPeso.getValue() / 100;
+        peso += intPeso.getValue();
+
+        ArrayList<Accessorio> acc = new ArrayList<>();
+        for (int i = 0; i < accessori.length; i++)
+            if (accessori[i].isSelected())
+                acc.add((Accessorio) accessori[i].getUserData());
+
+        Accessorio[] ac = new Accessorio[acc.size()];
+        for (int i = 0; i < acc.size(); i++)
+            ac[i] = acc.get(i);
+
+        //if (usedSwitch.isSelected())
+        auto = new Auto(brandCombo.getValue(), modello.getText().trim(), new Motore(alimCombo.getValue(), Integer.parseInt(cilindrata.getText()), Integer.parseInt(kw.getText())), new Tipo(versionCombo.getValue(), peso), Integer.parseInt(startingFrom.getText()), ac);
+        //else
+        //  auto = new AutoUsata(brandCombo.getValue(),modello.getText().trim(),new Motore(alimCombo.getValue(),Integer.parseInt(cilindrata.getText()),Integer.parseInt(kw.getText())),new Tipo(versionCombo.getValue(),peso),Integer.parseInt(startingFrom.getText()),(Accessorio[])acc.toArray(),datePicker.getValue());
+        try {
+            GestoreFile.inserimento(auto);
+            System.out.println("OK");
+            resetFields();
+            Notifications.create()
+                    .title("Fatto")
+                    .text("Salvato su file")
+                    .showInformation();
+        } catch (Exception exc) {
+            Notifications.create()
+                    .title("Attenzione")
+                    .text("Il salvataggio su file è fallito")
+                    .showWarning();
+            System.out.println("am i wrong");
+        }
     }
 
     public void annulla(ActionEvent ae) {
@@ -232,6 +265,20 @@ public class AddCar implements Initializable {
 
     private void enableAdd() {
         btnAdd.setDisable(startingFrom.getText().isEmpty() || modello.getText().trim().isEmpty() || kw.getText().isEmpty() || cilindrata.getText().isEmpty());
+    }
+
+    public void resetFields() {
+        alimCombo.getSelectionModel().selectFirst();
+        brandCombo.getSelectionModel().selectFirst();
+        versionCombo.getSelectionModel().selectFirst();
+        startingFrom.setText("");
+        modello.setText("");
+        cilindrata.setText("");
+        kw.setText("");
+        for (CheckBox c : accessori)
+            c.setSelected(false);
+        usedSwitch.setSelected(false);
+        datePicker.setValue(LocalDate.now());
     }
 
 }

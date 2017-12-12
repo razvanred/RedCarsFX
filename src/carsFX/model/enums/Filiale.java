@@ -1,6 +1,8 @@
 package carsFX.model.enums;
 
-public enum Filiale{
+import java.io.Serializable;
+
+public enum Filiale implements Serializable {
 
     TREVISO("Treviso", "3viso"),
     ODERZO("Oderzo", "orz"),

@@ -2,7 +2,9 @@ package carsFX.model;
 
 import carsFX.model.enums.Alimentazione;
 
-public class Motore {
+import java.io.Serializable;
+
+public class Motore implements Serializable {
 
     private int cilindrata;
     private int kw;
