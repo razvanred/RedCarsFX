@@ -12,12 +12,12 @@
                 <fx:include source="onsale.fxml"/>
             </Tab>
 
-            <Tab text="Auto vendute">
-                <fx:include source="sold.fxml"/>
+            <Tab text="Aggiungi">
+                <fx:include source="addcar.fxml"/>
             </Tab>
 
-            <Tab text="Extra">
-                <fx:include source="addcar.fxml"/>
+            <Tab text="Vendute">
+                <fx:include source="sold.fxml"/>
             </Tab>
 
         </JFXTabPane>

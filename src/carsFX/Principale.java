@@ -1,5 +1,6 @@
 package carsFX;
 
+import carsFX.model.Auto;
 import carsFX.model.enums.Filiale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Principale extends Application {
 
     public final static String TITLE = " - RosuCars";
     public static Filiale choosen;
+    public static final ArrayList<Auto> auto=new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception {

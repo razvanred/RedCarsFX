@@ -7,9 +7,9 @@ public enum Filiale{
     VITTORIO_VNT("Vittorio Veneto", "vittVeneto"),
     MOGLIANO_VNT("Mogliano Veneto", "moglVeneto");
 
-    private String nome, password;
+    private final String nome, password;
 
-    Filiale(String nome, String password) {
+    Filiale(final String nome, final String password) {
         this.nome = nome;
         this.password = password;
     }

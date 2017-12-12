@@ -1,19 +1,24 @@
 package carsFX.control;
 
+import carsFX.model.enums.Accessorio;
 import carsFX.model.enums.Alimentazione;
 import carsFX.model.enums.Marca;
 import carsFX.model.enums.Versione;
 import com.jfoenix.controls.*;
-import javafx.beans.value.ChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -24,12 +29,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AddCar implements Initializable {
 
     @FXML
     private JFXComboBox brandCombo;
+
+    @FXML
+    private VBox accContainer;
 
     @FXML
     private JFXComboBox versionCombo;
@@ -64,8 +73,31 @@ public class AddCar implements Initializable {
     @FXML
     private JFXDatePicker datePicker;
 
+    @FXML
+    private Label finalPrice;
+
+    private JFXCheckBox[] accessori;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        accessori=new JFXCheckBox[Accessorio.values().length];
+
+        for(int i=0;i<accessori.length;i++) {
+            final Accessorio accessorio=Accessorio.values()[i];
+            final HBox hbox=new HBox();
+            hbox.setSpacing(10);
+            accessori[i] = new JFXCheckBox(accessorio.getDescrizione());
+            accessori[i].setOnAction(event -> calcPrice());
+            hbox.getChildren().add(accessori[i]);
+            final Label label=new Label("EUR "+accessorio.getPrice());
+            label.setStyle("-fx-font-weight: bold");
+            hbox.getChildren().add(label);
+            accContainer.getChildren().add(hbox);
+        }
+
+
+        datePicker.setValue(LocalDate.now());
 
         for (Alimentazione a : Alimentazione.values())
             alimCombo.getItems().add(a);
@@ -80,19 +112,33 @@ public class AddCar implements Initializable {
         versionCombo.getSelectionModel().selectFirst();
         brandCombo.getSelectionModel().selectFirst();
 
-        ChangeListener<String> change = (observable, oldValue, newValue) -> {
+       /* final ChangeListener<String> change = (observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 //todo
                 //.setText(newValue.replaceAll("[^\\d]", ""));
+
             }
             enableAdd();
-        };
+        };*/
 
-        startingFrom.textProperty().addListener(change);
+        startingFrom.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*"))
+                startingFrom.setText(newValue.replaceAll("[^\\d]", ""));
+            calcPrice();
+            enableAdd();
+        });
 
-        kw.textProperty().addListener(change);
+        kw.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*"))
+                kw.setText(newValue.replaceAll("[^\\d]", ""));
+            enableAdd();
+        });
 
-        cilindrata.textProperty().addListener(change);
+        cilindrata.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*"))
+                cilindrata.setText(newValue.replaceAll("[^\\d]", ""));
+            enableAdd();
+        });
 
         modello.textProperty().addListener((observable, oldValue, newValue) -> {
             enableAdd();
@@ -113,6 +159,25 @@ public class AddCar implements Initializable {
         decPeso.setValueFactory(factoryDec);
 
         needUp = true;
+        datePicker.setVisible(false);
+    }
+
+    private void calcPrice(){
+
+        int price=0;
+
+        try{
+            price+=Integer.parseInt(startingFrom.getText());
+        }catch(NumberFormatException num){
+            System.err.println("Empty field");
+            //num.printStackTrace();
+        }
+
+        for(int i=0;i<accessori.length;i++)
+            if(accessori[i].isSelected())
+                price+= Accessorio.values()[i].getPrice();
+
+        finalPrice.setText(""+price);
     }
 
     public void aggiungi(ActionEvent ae) {
@@ -162,7 +227,7 @@ public class AddCar implements Initializable {
     }
 
     public void enableDate() {
-
+        datePicker.setVisible(usedSwitch.isSelected());
     }
 
     private void enableAdd() {
