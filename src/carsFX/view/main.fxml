@@ -6,19 +6,15 @@
 <BorderPane xmlns:fx="http://javafx.com/fx" fx:controller="carsFX.control.Main">
 
     <center>
-        <JFXTabPane>
+        <JFXTabPane fx:id="tabPane">
 
-            <Tab text="In vendita">
-                <fx:include source="onsale.fxml"/>
-            </Tab>
+            <Tab text="In vendita" fx:id="tabOnSale"/>
 
             <Tab text="Aggiungi">
                 <fx:include source="addcar.fxml"/>
             </Tab>
 
-            <Tab text="Vendute">
-                <fx:include source="sold.fxml"/>
-            </Tab>
+            <Tab text="Vendute" fx:id="tabSold"/>
 
         </JFXTabPane>
     </center>

@@ -8,21 +8,21 @@ import java.util.ArrayList;
 
 public final class GestoreFile {
 
-    private static final String ext = ".dat";
-
-    public static void inserimento(final Auto t) throws Exception {
+    public static void inserimento(final Auto t, final List list) throws Exception {
 
         final FileOutputStream fOUT;
         final ObjectOutputStream oOUT;
 
-        final File file = new File(Principale.choosen.name().toLowerCase() + ext);
+        final File file = new File(Principale.choosen.name().toLowerCase() + list + ext);
 
         if (!file.exists()) {
             fOUT = new FileOutputStream(file);
+            oOUT = new ObjectOutputStream(fOUT);
         } else {
             fOUT = new FileOutputStream(file, true);
+            oOUT = new AppendObjectOutputStream(fOUT);
         }
-        oOUT = new ObjectOutputStream(fOUT);
+
         oOUT.writeObject(t);
 
         oOUT.flush();
@@ -31,17 +31,23 @@ public final class GestoreFile {
 
     }
 
-    public static ArrayList<Auto> read() throws Exception {
+    private static final String ext = ".dat";
+
+    public static ArrayList<Auto> read(final List list) throws Exception {
         final ArrayList<Auto> auto = new ArrayList<>();
-        final File file = new File(Principale.choosen.name().toLowerCase() + ext);
+        System.out.println(Principale.choosen.name().toLowerCase() + ext);
+
+        final File file = new File(Principale.choosen.name().toLowerCase() + list + ext);
         if (file.exists()) {
             final FileInputStream fIN = new FileInputStream(file);
             final ObjectInputStream oIN = new ObjectInputStream(fIN);
 
             while (true) {
                 try {
+                    System.out.println("just here");
                     auto.add((Auto) oIN.readObject());
                 } catch (Exception exc) {
+                    System.err.println("end reading");
                     break;
                 }
             }
@@ -53,9 +59,9 @@ public final class GestoreFile {
         return auto;
     }
 
-    public static boolean delete(final Auto auto) throws Exception {
+    public static boolean delete(final Auto auto, final List list) throws Exception {
         final File diApp = new File("appoggio" + ext);
-        final File orig = new File(Principale.choosen.name().toLowerCase() + ext);
+        final File orig = new File(Principale.choosen.name().toLowerCase() + list + ext);
 
         final FileOutputStream fOUT = new FileOutputStream(diApp);
         final ObjectOutputStream oOUT = new ObjectOutputStream(fOUT);
@@ -85,6 +91,16 @@ public final class GestoreFile {
         diApp.renameTo(orig);
 
         return b;
+    }
+
+    public enum List {
+        onSale,
+        sold;
+
+        @Override
+        public String toString() {
+            return "_" + super.toString();
+        }
     }
 
 }

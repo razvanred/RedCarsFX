@@ -49,6 +49,8 @@ public class Login implements Initializable {
             toggleGroup.getToggles().get(0).setSelected(true);
             passwordField.textProperty().addListener((observable, oldValue, newValue) -> somethingWrong.setText(""));
         }
+
+        passwordField.requestFocus();
     }
 
     public void checkPasskey(ActionEvent ae) {
@@ -59,6 +61,8 @@ public class Login implements Initializable {
             somethingWrong.setText("Campo obbligatorio");
         else if (f.getPassword().compareTo(passwordField.getText()) == 0) {
             try {
+
+                Principale.choosen = f;
                 ((Stage) ((Node) (ae.getSource())).getScene().getWindow()).close();
 
                 Stage primaryStage = new Stage();
@@ -69,8 +73,6 @@ public class Login implements Initializable {
                 primaryStage.setScene(scene);
                 primaryStage.setTitle(f.getNome() + Principale.TITLE);
                 primaryStage.show();
-
-                Principale.choosen = f;
 
             } catch (IOException io) {
                 io.printStackTrace();

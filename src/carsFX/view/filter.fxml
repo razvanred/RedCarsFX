@@ -26,21 +26,21 @@
                 <HBox spacing="5">
                     <HBox spacing="3">
                         <Label style="-fx-font-weight: bold">Alimentazione</Label>
-                        <JFXComboBox fx:id="comboAlimentazione"/>
+                        <JFXComboBox fx:id="comboAlimentazione" onAction="#filter"/>
                     </HBox>
                     <HBox spacing="3">
                         <Label style="-fx-font-weight: bold">Versione</Label>
-                        <JFXComboBox fx:id="comboVersione"/>
+                        <JFXComboBox fx:id="comboVersione" onAction="#filter"/>
                     </HBox>
                     <HBox spacing="3">
                         <Label style="-fx-font-weight: bold">A partire da EUR</Label>
-                        <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT"/>
+                        <JFXTextField fx:id="startingAt" nodeOrientation="RIGHT_TO_LEFT" onAction="#filter"/>
                     </HBox>
                 </HBox>
 
             </left>
             <right>
-                <ToggleSwitch fx:id="neoToggle" text="Filtra per neopatentati"/>
+                <ToggleSwitch fx:id="neoToggle" text="Filtra per neopatentati" onMouseClicked="#filter"/>
             </right>
 
         </BorderPane>

@@ -1,6 +1,7 @@
 package carsFX.control;
 
 import carsFX.model.Auto;
+import carsFX.model.AutoUsata;
 import carsFX.model.Motore;
 import carsFX.model.Tipo;
 import carsFX.model.enums.Accessorio;
@@ -12,7 +13,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -23,7 +23,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.ToggleSwitch;
 
@@ -188,20 +187,22 @@ public class AddCar implements Initializable {
         peso += intPeso.getValue();
 
         ArrayList<Accessorio> acc = new ArrayList<>();
-        for (int i = 0; i < accessori.length; i++)
-            if (accessori[i].isSelected())
-                acc.add((Accessorio) accessori[i].getUserData());
+        for (JFXCheckBox anAccessori : accessori)
+            if (anAccessori.isSelected())
+                acc.add((Accessorio) anAccessori.getUserData());
 
         Accessorio[] ac = new Accessorio[acc.size()];
         for (int i = 0; i < acc.size(); i++)
             ac[i] = acc.get(i);
 
-        //if (usedSwitch.isSelected())
-        auto = new Auto(brandCombo.getValue(), modello.getText().trim(), new Motore(alimCombo.getValue(), Integer.parseInt(cilindrata.getText()), Integer.parseInt(kw.getText())), new Tipo(versionCombo.getValue(), peso), Integer.parseInt(startingFrom.getText()), ac);
-        //else
-        //  auto = new AutoUsata(brandCombo.getValue(),modello.getText().trim(),new Motore(alimCombo.getValue(),Integer.parseInt(cilindrata.getText()),Integer.parseInt(kw.getText())),new Tipo(versionCombo.getValue(),peso),Integer.parseInt(startingFrom.getText()),(Accessorio[])acc.toArray(),datePicker.getValue());
+        if (!usedSwitch.isSelected())
+            auto = new Auto(brandCombo.getValue(), modello.getText().trim(), new Motore(alimCombo.getValue(), Integer.parseInt(cilindrata.getText()), Integer.parseInt(kw.getText())), new Tipo(versionCombo.getValue(), peso), Integer.parseInt(startingFrom.getText()), ac);
+        else {
+            auto = new AutoUsata(brandCombo.getValue(), modello.getText().trim(), new Motore(alimCombo.getValue(), Integer.parseInt(cilindrata.getText()), Integer.parseInt(kw.getText())), new Tipo(versionCombo.getValue(), peso), Integer.parseInt(startingFrom.getText()), ac, datePicker.getValue());
+            System.err.println("used");
+        }
         try {
-            GestoreFile.inserimento(auto);
+            GestoreFile.inserimento(auto, GestoreFile.List.onSale);
             System.out.println("OK");
             resetFields();
             Notifications.create()
@@ -215,10 +216,6 @@ public class AddCar implements Initializable {
                     .showWarning();
             System.out.println("am i wrong");
         }
-    }
-
-    public void annulla(ActionEvent ae) {
-        ((Stage) ((Node) ae.getSource()).getScene().getWindow()).close();
     }
 
     public void selectImage(ActionEvent ae) {
@@ -279,6 +276,7 @@ public class AddCar implements Initializable {
             c.setSelected(false);
         usedSwitch.setSelected(false);
         datePicker.setValue(LocalDate.now());
+        datePicker.setVisible(false);
     }
 
 }

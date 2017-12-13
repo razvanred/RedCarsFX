@@ -1,5 +1,8 @@
 package carsFX.control;
 
+import carsFX.model.Auto;
+import carsFX.model.AutoUsata;
+import carsFX.model.RowAuto;
 import carsFX.model.enums.Alimentazione;
 import carsFX.model.enums.Marca;
 import carsFX.model.enums.Versione;
@@ -8,7 +11,6 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Toggle;
@@ -18,6 +20,7 @@ import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Filter implements Initializable {
@@ -52,6 +55,7 @@ public class Filter implements Initializable {
                 if (!newValue.matches("\\d*")) {
                     startingAt.setText(newValue.replaceAll("[^\\d]", ""));
                 }
+                filter();
             }
         });
 
@@ -75,9 +79,10 @@ public class Filter implements Initializable {
             button.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if (newValue) {
+                    filter();
+                    /*if (newValue) {
                         System.out.println(m.getNome());
-                    }
+                    }*/
                 }
             });
         }
@@ -85,7 +90,8 @@ public class Filter implements Initializable {
         status.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                System.out.println(newValue.getUserData());
+                //System.out.println(newValue.getUserData());
+                filter();
             }
         });
 
@@ -103,13 +109,64 @@ public class Filter implements Initializable {
 
     }
 
-    public void comboAction(ActionEvent ae) {
-
-    }
-
     public void attachTable(final TableProperties table) {
         this.table = table;
     }
 
+
+    public void filter() {
+
+        int price;
+
+        try {
+            price = Integer.parseInt(startingAt.getText());
+        } catch (NumberFormatException num) {
+            price = 0;
+        }
+
+        try {
+            ArrayList<Auto> auto = GestoreFile.read(table.getList());
+            table.getCars().clear();
+            for (Auto a : auto) {
+                if (a.getTotalPrice() >= price && testVersione(a) && testAlimentazione(a) && testConditions(a) && a.isNeo() == neoToggle.isSelected() && testBrand(a))
+                    table.getCars().add(new RowAuto(a));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean testBrand(final Auto a) {
+
+        for (int i = 0; i < filterBrand.getButtons().size(); i++)
+            if (filterBrand.getButtons().get(i).isSelected())
+                return (Marca) filterBrand.getButtons().get(i).getUserData() == a.getMarca();
+
+        return true;
+    }
+
+    private boolean testConditions(final Auto auto) {
+        if (radioUsed.isSelected())
+            return auto instanceof AutoUsata;
+        else
+            return !(auto instanceof AutoUsata);
+    }
+
+    private boolean testVersione(final Auto a) {
+        try {
+            return Versione.values()[comboVersione.getSelectionModel().getSelectedIndex() - 1] == a.getTipo().getVersione();
+        } catch (ArrayIndexOutOfBoundsException ar) {
+            return true;
+        }
+    }
+
+    private boolean testAlimentazione(final Auto a) {
+        try {
+            return Alimentazione.values()[comboAlimentazione.getSelectionModel().getSelectedIndex() - 1] == a.getMotore().getAlimentazione();
+        } catch (ArrayIndexOutOfBoundsException ar) {
+            return true;
+        }
+    }
 
 }

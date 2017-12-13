@@ -19,7 +19,7 @@ public class AutoUsata extends Auto implements Serializable {
         return date;
     }
 
-    @Override
+
     public final String getDate() {
         return date.toString();
     }

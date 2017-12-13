@@ -26,4 +26,22 @@ public class Tipo implements Serializable {
     public Versione getVersione() {
         return versione;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tipo)) return false;
+
+        Tipo tipo = (Tipo) o;
+
+        if (Float.compare(tipo.tonn, tonn) != 0) return false;
+        return versione == tipo.versione;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = versione != null ? versione.hashCode() : 0;
+        result = 31 * result + (tonn != +0.0f ? Float.floatToIntBits(tonn) : 0);
+        return result;
+    }
 }

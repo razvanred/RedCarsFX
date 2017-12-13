@@ -142,7 +142,7 @@
             </right>
 
             <left>
-                <JFXButton onAction="#annulla" style="-fx-background-color: red" text="ANNULLA" textFill="white"/>
+                <JFXButton onAction="#resetFields" style="-fx-background-color: red" text="ANNULLA" textFill="white"/>
             </left>
 
         </BorderPane>
