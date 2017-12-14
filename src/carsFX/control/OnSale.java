@@ -1,7 +1,9 @@
 package carsFX.control;
 
+import carsFX.model.Auto;
+import carsFX.model.RowAuto;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
+import org.controlsfx.control.Notifications;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,8 +17,18 @@ public class OnSale extends TableProperties {
 
 
     public void sellCar(final ActionEvent ae) {
-        final Alert alert;
-        //Auto a=table.getSelectionModel().getSelectedItem();
+
+        final Auto row = ((RowAuto) table.getSelectionModel().getSelectedItem()).getA();
+
+
+        try {
+            GestoreFile.inserimento(row, GestoreFile.List.sold);
+            GestoreFile.delete(row, getList());
+            Notifications.create().title("Fatto").text("L'auto è stata venduta con successo").showInformation();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            Notifications.create().title("Attenzione").text("Si è verificato un problema durante la vendita").showWarning();
+        }
     }
 
     @Override
