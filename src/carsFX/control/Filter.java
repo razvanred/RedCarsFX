@@ -128,13 +128,17 @@ public class Filter implements Initializable {
             ArrayList<Auto> auto = GestoreFile.read(table.getList());
             table.getCars().clear();
             for (Auto a : auto) {
-                if (a.getTotalPrice() >= price && testVersione(a) && testAlimentazione(a) && testConditions(a) && a.isNeo() == neoToggle.isSelected() && testBrand(a))
+                if (a.getTotalPrice() >= price && testVersione(a) && testAlimentazione(a) && testConditions(a) && testNeo(a) && testBrand(a))
                     table.getCars().add(new RowAuto(a));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean testNeo(final Auto a) {
+        return !neoToggle.isSelected() || a.isNeo();
     }
 
     private boolean testBrand(final Auto a) {

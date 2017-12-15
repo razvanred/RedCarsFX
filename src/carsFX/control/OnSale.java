@@ -24,9 +24,11 @@ public class OnSale extends TableProperties {
         try {
             GestoreFile.inserimento(row, GestoreFile.List.sold);
             GestoreFile.delete(row, getList());
+            refreshData();
             Notifications.create().title("Fatto").text("L'auto è stata venduta con successo").showInformation();
         } catch (Exception exc) {
             exc.printStackTrace();
+            refreshData();
             Notifications.create().title("Attenzione").text("Si è verificato un problema durante la vendita").showWarning();
         }
     }
