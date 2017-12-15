@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RosuCarsFX:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RosuCarsFX_jar</output-path>
+    <root id="archive" name="RosuCarsFX.jar">
+      <element id="module-output" name="RosuCarsFX" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/controlsfx-8.40.14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jfoenix.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

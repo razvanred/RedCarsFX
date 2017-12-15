@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<BorderPane fx:controller="carsFX.control.Login"
-            xmlns:fx="http://javafx.com/fxml">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="carsFX.control.Login">
 
     <top>
         <VBox spacing="1">
@@ -35,7 +35,8 @@
                                       onAction="#checkPasskey"/>
                 </left>
                 <right>
-                    <JFXButton text="ACCEDI" onAction="#checkPasskey" style="-fx-background-color: dodgerblue" textFill="white"/>
+                    <JFXButton text="ACCEDI" onAction="#checkPasskey" style="-fx-background-color: dodgerblue"
+                               textFill="white"/>
                 </right>
             </BorderPane>
             <Label textFill="red" fx:id="somethingWrong" textAlignment="CENTER"/>

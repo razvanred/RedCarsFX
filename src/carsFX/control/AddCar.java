@@ -268,12 +268,12 @@ public class AddCar implements Initializable {
         alimCombo.getSelectionModel().selectFirst();
         brandCombo.getSelectionModel().selectFirst();
         versionCombo.getSelectionModel().selectFirst();
-        startingFrom.setText("");
         modello.setText("");
         cilindrata.setText("");
         kw.setText("");
         for (CheckBox c : accessori)
             c.setSelected(false);
+        startingFrom.setText("");
         usedSwitch.setSelected(false);
         datePicker.setValue(LocalDate.now());
         datePicker.setVisible(false);

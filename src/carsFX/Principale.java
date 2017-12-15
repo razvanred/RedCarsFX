@@ -13,8 +13,12 @@ import java.util.ArrayList;
 public class Principale extends Application {
 
     public final static String TITLE = " - RosuCars";
+    public static final ArrayList<Auto> auto = new ArrayList<>();
     public static Filiale choosen;
-    public static final ArrayList<Auto> auto=new ArrayList<>();
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -29,9 +33,5 @@ public class Principale extends Application {
         //Auto usata=new AutoUsata(Marca.PEUGEOT,"206", new Motore(Alimentazione.BENZINA,1500,40),new Tipo(Versione.UTILITARIA,3f), LocalDate.now());
         //Auto nuova=new Auto(Marca.PEUGEOT,"206", new Motore(Alimentazione.BENZINA,1500,40),new Tipo(Versione.UTILITARIA,3f));
         //System.out.println(nuova instanceof AutoUsata);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

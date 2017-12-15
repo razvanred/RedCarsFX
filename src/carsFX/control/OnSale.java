@@ -3,6 +3,7 @@ package carsFX.control;
 import carsFX.model.Auto;
 import carsFX.model.RowAuto;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import org.controlsfx.control.Notifications;
 
 import java.net.URL;
@@ -17,19 +18,23 @@ public class OnSale extends TableProperties {
 
 
     public void sellCar(final ActionEvent ae) {
-
-        final Auto row = ((RowAuto) table.getSelectionModel().getSelectedItem()).getA();
-
-
         try {
-            GestoreFile.inserimento(row, GestoreFile.List.sold);
-            GestoreFile.delete(row, getList());
-            refreshData();
-            Notifications.create().title("Fatto").text("L'auto è stata venduta con successo").showInformation();
-        } catch (Exception exc) {
-            exc.printStackTrace();
-            refreshData();
-            Notifications.create().title("Attenzione").text("Si è verificato un problema durante la vendita").showWarning();
+            final Auto row = ((RowAuto) table.getSelectionModel().getSelectedItem()).getA();
+            try {
+                GestoreFile.inserimento(row, GestoreFile.List.sold);
+                GestoreFile.delete(row, getList());
+                refreshData();
+                Notifications.create().title("Fatto").text("L'auto è stata venduta con successo").showInformation();
+            } catch (Exception exc) {
+                exc.printStackTrace();
+                refreshData();
+                Notifications.create().title("Attenzione").text("Si è verificato un problema durante la vendita").showWarning();
+            }
+        }catch(NullPointerException nuller){
+            final Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attenzione");
+            alert.setHeaderText("Devi prima selezionare un'auto");
+            alert.showAndWait();
         }
     }
 

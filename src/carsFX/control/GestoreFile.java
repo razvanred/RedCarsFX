@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public final class GestoreFile {
 
+    private static final String ext = ".dat";
+
     public static void inserimento(final Auto t, final List list) throws Exception {
 
         final FileOutputStream fOUT;
@@ -30,8 +32,6 @@ public final class GestoreFile {
         fOUT.close();
 
     }
-
-    private static final String ext = ".dat";
 
     public static ArrayList<Auto> read(final List list) throws Exception {
         final ArrayList<Auto> auto = new ArrayList<>();
