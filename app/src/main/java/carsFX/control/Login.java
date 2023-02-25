@@ -66,7 +66,7 @@ public class Login implements Initializable {
                 ((Stage) ((Node) (ae.getSource())).getScene().getWindow()).close();
 
                 Stage primaryStage = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("/carsFX/view/main.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
 
                 Scene scene = new Scene(root, 1240, 850);
 

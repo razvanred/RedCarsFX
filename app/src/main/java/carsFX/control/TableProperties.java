@@ -39,7 +39,7 @@ public abstract class TableProperties implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cars = FXCollections.observableArrayList();
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/carsFX/view/filter.fxml"));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/filter.fxml"));
         try {
             parent.setTop(loader.load());
         } catch (IOException io) {

@@ -22,7 +22,7 @@ public class Principale extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
         primaryStage.setTitle("Accedi" + TITLE);
         primaryStage.setScene(new Scene(root, 290, 435));
         primaryStage.setResizable(false);

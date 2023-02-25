@@ -25,7 +25,7 @@ public class Main implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/carsFX/view/onsale.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/onsale.fxml"));
         try {
             tabOnSale.setContent(loader.load());
         } catch (IOException io) {
@@ -33,7 +33,7 @@ public class Main implements Initializable {
         }
 
         onSale = loader.getController();
-        loader = new FXMLLoader(getClass().getResource("/carsFX/view/sold.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/view/sold.fxml"));
 
         try {
             tabSold.setContent(loader.load());
