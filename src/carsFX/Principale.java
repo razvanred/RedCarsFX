@@ -27,11 +27,5 @@ public class Principale extends Application {
         primaryStage.setScene(new Scene(root, 290, 435));
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
-        //System.out.println(Accessorio.AUTORADIO.name());
-        //Auto usata=new AutoUsata(Marca.PEUGEOT,"206", new Motore(Alimentazione.BENZINA,1500,40),new Tipo(Versione.UTILITARIA,3f), LocalDate.now());
-        //Auto nuova=new Auto(Marca.PEUGEOT,"206", new Motore(Alimentazione.BENZINA,1500,40),new Tipo(Versione.UTILITARIA,3f));
-        //System.out.println(nuova instanceof AutoUsata);
     }
 }
